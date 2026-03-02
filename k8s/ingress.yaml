@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: visualsubnetcalc
+  labels:
+    app: nginx
+spec:
+  ingressClassName: nginx   # IMPORTANT for RKE2
+  rules:
+    - host: 10.0.0.28-subnet.sslip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: visualsubnetcalc
+                port:
+                  number: 8080
